@@ -20,8 +20,7 @@ func _ready():
 		animation_name = get_animation_list()[0]
 	if slider_node:
 		slider = get_node(slider_node)
-		if slider is Slider:
-			slider.value_changed.connect(_on_slider_value_changed)
+		slider.value_changed.connect(_on_slider_value_changed)
 	if animation_name.is_empty():
 		set_process(false)
 	else:
