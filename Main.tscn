@@ -1,0 +1,64 @@
+[gd_scene load_steps=6 format=3 uid="uid://brcothjx3h3d6"]
+
+[ext_resource type="Texture2D" uid="uid://b1i1peg7jrc4y" path="res://asset-library-icon.png" id="1_l1w4t"]
+[ext_resource type="Script" path="res://addons/animation_slider/animation_slider.gd" id="3"]
+
+[sub_resource type="Animation" id="1"]
+resource_name = "Anim"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(174, 313), Vector2(340, 120), Vector2(502, 280), Vector2(678, 194)]
+}
+
+[sub_resource type="Animation" id="2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(174, 313)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fpjjw"]
+_data = {
+"Anim": SubResource("1"),
+"RESET": SubResource("2")
+}
+
+[node name="Main" type="Node2D"]
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(174, 313)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_l1w4t")
+
+[node name="HSlider" type="HSlider" parent="."]
+offset_left = 459.0
+offset_top = 343.0
+offset_right = 678.0
+offset_bottom = 359.0
+value = 50.0
+
+[node name="AnimationSlider" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_fpjjw")
+}
+script = ExtResource("3")
+slider_node = NodePath("../HSlider")
+target_position = 0.5
+animation_name = "Anim"
